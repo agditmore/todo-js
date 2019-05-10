@@ -5,9 +5,11 @@ let todos = [
   {id: 4, text: "Write thank-you notes", complete: false},
 ];
 
-function showList () {
-  var entireList = document.getElementbyId("main-todo-list");
-  for (var i=0; i++; i<todos.length){
+function showList() {
+  var entireList = document.getElementById("main-todo-list");
+  console.log(todos.length);
+  
+  for (var i=0; i<todos.length; i++){
     //creating new HTML for each item in the array
     var newListDiv = document.createElement("div");
     var newListCheckbox = document.createElement("input");
@@ -24,8 +26,19 @@ function showList () {
     entireList.appendChild(newListDiv);
     newListDiv.appendChild(newListCheckbox);
     newListDiv.appendChild(newListItem);
-  }
-
-  //this is a test commit
-  //this a second commit
+  
+    //check off already completed tasks
+    if (todos[i]["complete"] == true){
+      newListCheckbox.checked = true;
+      newListDiv = newListDiv.complete;
+    };
+  };
 };
+
+showList();
+
+//add ability to check completed tasks in the future
+//newListCheckbox.onclick = function checkOff(){
+  //newListDiv.classList.toggle(newListCheckbox.checked, newListDiv.complete);
+  //not sure how to identify task in JS array to change complete status
+//};
