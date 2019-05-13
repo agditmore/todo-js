@@ -5,10 +5,10 @@ let todos = [
   {id: 4, text: "Write thank-you notes", complete: false},
 ];
 
+var entireList = document.getElementById("main-todo-list");
+var toDoCount = document.getElementById("remaining-count");
 function showList() {
-  var entireList = document.getElementById("main-todo-list");
-  console.log(todos.length);
-  
+  var count = 0;
   for (var i=0; i<todos.length; i++){
     //creating new HTML for each item in the array
     var newListDiv = document.createElement("div");
@@ -17,8 +17,10 @@ function showList() {
 
     //assigning attributes to new HTML
     newListDiv.className = "todo";
+    newListDiv.id = i;
     newListCheckbox.className = "todo-checkbox";
     newListCheckbox.type = "checkbox";
+    newListCheckbox.id = i;
     newListItem.className = "todo-text";
     newListItem.innerHTML = todos[i].text;
 
@@ -30,15 +32,31 @@ function showList() {
     //check off already completed tasks
     if (todos[i]["complete"] == true){
       newListCheckbox.checked = true;
-      newListDiv = newListDiv.complete;
+      newListDiv.classList.add("complete");
     };
+
+    //add ability to check completed tasks in the future
+    //newListCheckbox.onclick = function checkOff(){
+      //checkListDiv.classList.toggle(newListCheckbox.checked);
+      //newListDiv.classList.add("complete");
+      //todos[i]["complete"] = !todos[i]["complete"];
+
+
+      // if (newListCheckbox.checked == false){
+      //   newListCheckbox.checked = true;
+      //   newListDiv.classList.add("complete");
+      // }
+      // else {
+      //   newListCheckbox.checked = false;
+      //   newListDiv.classList.remove("complete");
+      // };
+
+    //count items left to do
+    if (todos[i]["complete"] == false){
+      count++;
+    };
+    };
+    toDoCount.innerText = count;
   };
-};
 
 showList();
-
-//add ability to check completed tasks in the future
-//newListCheckbox.onclick = function checkOff(){
-  //newListDiv.classList.toggle(newListCheckbox.checked, newListDiv.complete);
-  //not sure how to identify task in JS array to change complete status
-//};
